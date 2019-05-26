@@ -102,6 +102,9 @@ class _HomePageState extends State<HomePage> {
     // Intenta cargar del local storage el ID de dispositivo
     this.id = prefs.getInt('appId');
 
+    // Acá, cuando se crea el websocket, se podría mandar en los headers qué tipo es el usuario,
+    // si operador o personita, para que el servidor sepa qué hacer en su lógica behind
+
     // En caso de que el ID no sea nulo, se manda en la conexión al web socket para que el servidor
     // sepa cuál dispositivo es este
     if (this.id != null) {
