@@ -29,7 +29,7 @@ class BasicConsumer(WebsocketConsumer):
             self.scope['dispositivo'] = dispositivo
         else:
             dispositivo = Dispositivo.objects.create(
-                tipo=3
+                tipo=3 # Cualquier cosa
             )
             self.scope['dispositivo'] = dispositivo
         self.accept()
@@ -39,6 +39,7 @@ class BasicConsumer(WebsocketConsumer):
         Se ejecuta justo al cerrar la conexión.
         """
 
+        # Un mensaje de despedida, probablemente no se muestre
         self.send(
             text_data="Goodbye my friend!"
         )
@@ -48,23 +49,22 @@ class BasicConsumer(WebsocketConsumer):
         Al recibir un mensaje, si es un JSON exitoso, retorna el mismo mensaje
         y un mensaje adicional, ademas del codigo de dispositivo.
         """
+
         try:
             text_data_json = json.loads(text_data)
             message = text_data_json['message']
 
             self.send(text_data=json.dumps({
                 'message': message,
-                'dispositivo': self.scope['dispositivo'].id
+                'appId': self.scope['dispositivo'].id
             }))
         except json.JSONDecodeError:
             self.send(text_data=json.dumps({
                 'message': "El mensaje enviado no es un JSON correctamente formateado (pasalo en 'message').",
-                'dispositivo': self.scope['dispositivo'].id
+                'appId': self.scope['dispositivo'].id
             }))
         except Exception as e:
             self.send(text_data=json.dumps({
                 'message': "Ha ocurrido un error genérico en el servidor. El error es %s." % e,
-                'dispositivo': self.scope['dispositivo'].id
+                'appId': self.scope['dispositivo'].id
             }))
-
-       

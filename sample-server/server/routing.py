@@ -3,7 +3,6 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 import sockets.routing
 
 application = ProtocolTypeRouter({
-    # (http->django views is added by default)
     'websocket': AuthMiddlewareStack(
         URLRouter(
             sockets.routing.websocket_urlpatterns
