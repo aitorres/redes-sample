@@ -25,7 +25,12 @@ SECRET_KEY = 'zm#@w@w=vf!6a!0#oga6l_u84be^1y-789f4s25^hr$6s9#9+@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'redessample.pythonanywhere.com',
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0',
+]
 
 
 # Application definition
